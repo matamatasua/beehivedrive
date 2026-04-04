@@ -1,0 +1,17 @@
+{
+  "name": "BeehiveDrive",
+  "short_name": "BeehiveDrive",
+  "description": "Pass your Utah driver's test with AI-powered adaptive learning",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9FAFB",
+  "theme_color": "#F59E0B",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
