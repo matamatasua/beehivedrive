@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
 import type { Question, Confidence } from "@/types";
 import { Button } from "@/components/ui/Button";
+import { ExplainButton } from "@/components/quiz/ExplainButton";
 
 interface QuestionCardProps {
   question: Question;
@@ -205,6 +206,16 @@ export function QuestionCard({
                     <p className="text-xs font-semibold text-amber-700 mb-1">Memory Trick</p>
                     <p className="text-sm text-amber-800">{question.mnemonic}</p>
                   </div>
+                )}
+                {!isCorrect && selectedIndex !== null && (
+                  <ExplainButton
+                    questionText={question.text}
+                    correctAnswer={question.options[correctIndex].text}
+                    selectedAnswer={question.options[selectedIndex].text}
+                    explanation={question.explanation}
+                    utahCodeRef={question.utahCodeRef}
+                    categoryId={question.categoryId}
+                  />
                 )}
               </div>
             </div>

@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
   progress: "beehive_progress",
   sessions: "beehive_sessions",
   onboarding: "beehive_onboarding",
+  achievements: "beehive_achievements",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
@@ -69,6 +70,7 @@ export function clearAllStorage(): void {
   removeStorageItem(STORAGE_KEYS.progress);
   removeStorageItem(STORAGE_KEYS.sessions);
   removeStorageItem(STORAGE_KEYS.onboarding);
+  removeStorageItem(STORAGE_KEYS.achievements);
 }
 
 export { STORAGE_KEYS };

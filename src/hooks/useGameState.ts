@@ -26,6 +26,8 @@ import {
   STORAGE_KEYS,
 } from "@/lib/storage";
 import { MIN_STREAK_QUESTIONS } from "@/lib/constants";
+import { checkAchievements } from "@/lib/achievements";
+import type { SessionType, Track } from "@/types";
 
 // ============================================
 // Persisted State Shapes
@@ -66,15 +68,19 @@ const DEFAULT_USER: PersistedUser = {
 export function useGameState() {
   const [user, setUser] = useState<PersistedUser>(DEFAULT_USER);
   const [progress, setProgress] = useState<ProgressMap>({});
+  const [earnedAchievements, setEarnedAchievements] = useState<string[]>([]);
+  const [newlyEarned, setNewlyEarned] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   // --- Load from localStorage on mount ---
   useEffect(() => {
     const storedUser = getStorageItem<PersistedUser>(STORAGE_KEYS.user);
     const storedProgress = getStorageItem<ProgressMap>(STORAGE_KEYS.progress);
+    const storedAchievements = getStorageItem<string[]>(STORAGE_KEYS.achievements);
 
     if (storedUser) setUser(storedUser);
     if (storedProgress) setProgress(storedProgress);
+    if (storedAchievements) setEarnedAchievements(storedAchievements);
 
     setLoaded(true);
   }, []);
@@ -91,12 +97,25 @@ export function useGameState() {
     setStorageItem(STORAGE_KEYS.progress, progress);
   }, [progress, loaded]);
 
+  // --- Persist achievements whenever they change ---
+  useEffect(() => {
+    if (!loaded) return;
+    setStorageItem(STORAGE_KEYS.achievements, earnedAchievements);
+  }, [earnedAchievements, loaded]);
+
   // ------------------------------------------------------------------
   // Record the results of a completed quiz session.
   // Updates Leitner boxes, XP, streaks, and category mastery.
   // ------------------------------------------------------------------
   const recordQuizResults = useCallback(
-    (results: QuizResult[]) => {
+    (
+      results: QuizResult[],
+      sessionMeta?: {
+        sessionType?: SessionType;
+        track?: Track;
+        categoryMastery?: Record<string, number>;
+      }
+    ) => {
       setProgress((prev) => {
         const next = { ...prev };
 
@@ -152,6 +171,35 @@ export function useGameState() {
           licenseLevel: prev.licenseLevel, // recalculated via getReadiness
         };
       });
+
+      // --- Check achievements after recording results ---
+      // We read user/progress/achievements from state via closure.
+      // Use setTimeout(0) so the state updates above have been enqueued.
+      setTimeout(() => {
+        setUser((currentUser) => {
+          setProgress((currentProgress) => {
+            setEarnedAchievements((currentEarned) => {
+              const newIds = checkAchievements({
+                user: currentUser,
+                progress: currentProgress,
+                earnedAchievements: currentEarned,
+                latestResults: results,
+                latestSessionType: sessionMeta?.sessionType,
+                latestTrack: sessionMeta?.track,
+                categoryMastery: sessionMeta?.categoryMastery,
+              });
+
+              if (newIds.length > 0) {
+                setNewlyEarned(newIds);
+                return [...currentEarned, ...newIds];
+              }
+              return currentEarned;
+            });
+            return currentProgress; // no mutation
+          });
+          return currentUser; // no mutation
+        });
+      }, 0);
     },
     []
   );
@@ -232,21 +280,33 @@ export function useGameState() {
   );
 
   // ------------------------------------------------------------------
+  // Dismiss the toast for newly earned achievements.
+  // ------------------------------------------------------------------
+  const dismissNewAchievements = useCallback(() => {
+    setNewlyEarned([]);
+  }, []);
+
+  // ------------------------------------------------------------------
   // Reset all persisted progress and user state.
   // ------------------------------------------------------------------
   const resetProgress = useCallback(() => {
     clearAllStorage();
     setUser(DEFAULT_USER);
     setProgress({});
+    setEarnedAchievements([]);
+    setNewlyEarned([]);
   }, []);
 
   return {
     user,
     progress,
     loaded,
+    earnedAchievements,
+    newlyEarned,
     recordQuizResults,
     getReadiness,
     getCategoryMastery,
+    dismissNewAchievements,
     resetProgress,
   };
 }

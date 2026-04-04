@@ -11,6 +11,8 @@ import {
   Map,
   Hash,
   Clock,
+  FileText,
+  ArrowRight,
 } from "lucide-react";
 import { Card, CardBody } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -18,6 +20,8 @@ import { XpDisplay } from "@/components/game/XpDisplay";
 import { StreakDisplay } from "@/components/game/StreakDisplay";
 import { LicenseBadge } from "@/components/game/LicenseBadge";
 import { UtahRoadMap } from "@/components/game/UtahRoadMap";
+import { AchievementToast } from "@/components/game/AchievementToast";
+import { StudyTipCard } from "@/components/game/StudyTipCard";
 import { useGameState } from "@/hooks/useGameState";
 import { getLicenseLevel } from "@/lib/learning/leitner";
 import { SAMPLE_QUESTIONS } from "@/lib/sample-questions";
@@ -31,7 +35,7 @@ for (const q of SAMPLE_QUESTIONS) {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { user, loaded, getCategoryMastery } = useGameState();
+  const { user, loaded, getCategoryMastery, newlyEarned, dismissNewAchievements } = useGameState();
 
   // Compute category mastery from persisted progress
   const mastery = useMemo(
@@ -89,6 +93,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <AchievementToast newlyEarned={newlyEarned} onDismiss={dismissNewAchievements} />
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
@@ -128,6 +133,46 @@ export default function DashboardPage() {
           />
         </motion.div>
 
+        {/* AI Study Tip */}
+        <StudyTipCard
+          weakCategories={Object.entries(fullMastery)
+            .filter(([, v]) => v < 40)
+            .map(([k]) => k.replace(/_/g, " "))}
+          strongCategories={Object.entries(fullMastery)
+            .filter(([, v]) => v >= 70)
+            .map(([k]) => k.replace(/_/g, " "))}
+          readiness={readiness}
+          streak={user.currentStreak}
+        />
+
+        {/* Exam Simulator CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <Card
+            hover
+            onClick={() => router.push("/exam?track=written_knowledge")}
+            className="bg-linear-to-r from-amber-400 to-amber-500 border-amber-500 overflow-hidden"
+          >
+            <CardBody className="py-5">
+              <div className="flex items-center gap-4">
+                <div className="shrink-0 w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <FileText size={24} className="text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-white text-base">Exam Simulator</p>
+                  <p className="text-sm text-white/80 leading-snug">
+                    Take a full 50-question timed test — just like the real DLD exam
+                  </p>
+                </div>
+                <ArrowRight size={20} className="text-white/70 shrink-0" />
+              </div>
+            </CardBody>
+          </Card>
+        </motion.div>
+
         {/* Quick actions */}
         <div className="grid grid-cols-2 gap-3">
           <Card hover onClick={() => handleStartQuiz("quick_quiz", "written_knowledge")}>
@@ -151,7 +196,7 @@ export default function DashboardPage() {
               <p className="text-xs text-gray-500">Master the key numbers</p>
             </CardBody>
           </Card>
-          <Card hover onClick={() => handleStartQuiz("quick_quiz", "traffic_safety")}>
+          <Card hover onClick={() => router.push("/challenge")}>
             <CardBody className="text-center py-5">
               <Shield size={28} className="mx-auto text-red-500 mb-2" />
               <p className="font-semibold text-gray-900">100% Challenge</p>

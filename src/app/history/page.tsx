@@ -13,6 +13,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Card, CardBody } from "@/components/ui/Card";
+import { AchievementGallery } from "@/components/game/AchievementGallery";
 import { useGameState } from "@/hooks/useGameState";
 import { SAMPLE_QUESTIONS } from "@/lib/sample-questions";
 import { getCategoryName } from "@/lib/category-utils";
@@ -82,7 +83,7 @@ function getMasteryStyle(pct: number): { bg: string; text: string } {
 
 export default function HistoryPage() {
   const router = useRouter();
-  const { user, progress, loaded, getCategoryMastery } = useGameState();
+  const { user, progress, loaded, getCategoryMastery, earnedAchievements } = useGameState();
 
   // Derived data
   const totalQuestionsAnswered = useMemo(() => {
@@ -215,7 +216,15 @@ export default function HistoryPage() {
           </div>
         </motion.section>
 
-        {/* B. Category Mastery Heatmap */}
+        {/* B. Achievements */}
+        <motion.section variants={itemVariants}>
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+            Achievements
+          </h2>
+          <AchievementGallery earnedAchievements={earnedAchievements} />
+        </motion.section>
+
+        {/* C. Category Mastery Heatmap */}
         <motion.section variants={itemVariants}>
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
             Category Mastery
