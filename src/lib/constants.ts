@@ -184,7 +184,7 @@ export const KEY_NUMBERS = [
   { value: "500 feet", rule: "Dim high beams for oncoming vehicle", mnemonic: "5 fingers waving at the oncoming car, 500 feet." },
   { value: "300 feet", rule: "Dim high beams when following", mnemonic: "Following is closer than oncoming. 300 < 500." },
   { value: "1,000 feet", rule: "Headlights required when visibility is less than", mnemonic: "1,000 feet. Think '1K visibility' like a 1K race you can barely see." },
-  { value: "3 seconds", rule: "Minimum following distance at highway speed", mnemonic: "3 seconds: 'Only a FOOL follows too close.' Fool has 4 letters, but 3 is the rule." },
+  { value: "2 seconds", rule: "Minimum following distance at highway speed", mnemonic: "2 seconds: 'Two eyes watching the road, two seconds of space.' Increase in adverse conditions." },
   { value: "15 feet", rule: "Minimum distance from fire hydrant when parking", mnemonic: "15, same as the permit age. Stay 15 from hydrants!" },
   { value: "0.02%", rule: "BAC level where impairment actually begins", mnemonic: "POINT-ZERO-TWO: Two sips and you're already impaired." },
   { value: "0.05%", rule: "Utah's legal BAC limit (lowest in US)", mnemonic: "Utah's POINT-ZERO-FIVE is #1 strictest. High five for safety! ✋" },
@@ -193,5 +193,5 @@ export const KEY_NUMBERS = [
   { value: "40 hours", rule: "Supervised driving required (10 at night) for teens", mnemonic: "40 hours, a full work week of driving practice." },
   { value: "6 months", rule: "Minimum learner permit holding period", mnemonic: "Half a year with your permit before you can test." },
   { value: "12 inches", rule: "Maximum distance from curb when parallel parking", mnemonic: "12 inches = 1 foot. Park within a foot of the curb." },
-  { value: "100 feet", rule: "Signal before turning in the city", mnemonic: "100 feet in the city. Think '1 football field' (roughly)." },
+  { value: "2 seconds / 100 feet", rule: "Signal before turning or changing lanes (2 seconds per handbook; 100 feet per Utah Code)", mnemonic: "2 seconds before you turn or change lanes. 100 feet is the Utah Code distance rule." },
 ] as const;
