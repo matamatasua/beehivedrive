@@ -68,7 +68,7 @@ function generateRecommendation(
     case "almost":
       return `Almost there! Focus on ${weakAreas.slice(0, 2).join(" and ")}. These topics appear frequently on the test.`;
     case "not_ready":
-      return `Keep studying! Focus on ${weakAreas[0] ?? "the topics below"} first — it's the area with the most room for improvement.`;
+      return `Keep studying! Focus on ${weakAreas[0] ?? "the topics below"} first. It's the area with the most room for improvement.`;
   }
 }
 

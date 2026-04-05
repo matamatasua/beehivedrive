@@ -239,7 +239,7 @@ function DiagnosticQuiz({
           Quick Diagnostic
         </h2>
         <p className="text-sm text-gray-500">
-          Let&apos;s see where you stand &mdash; 10 quick questions
+          Let&apos;s see where you stand. 10 quick questions!
         </p>
       </div>
 
@@ -580,8 +580,8 @@ export default function OnboardingPage() {
                       <FileText size={16} />
                     </span>
                     <span>
-                      <strong>Written Knowledge Test</strong> &mdash; 50
-                      questions, 80% to pass
+                      <strong>Written Knowledge Test</strong> (50
+                      questions, 80% to pass)
                     </span>
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-700">
@@ -589,8 +589,8 @@ export default function OnboardingPage() {
                       <CheckCircle size={16} />
                     </span>
                     <span>
-                      <strong>Traffic Safety Exam</strong> &mdash; 40 questions,
-                      100% required
+                      <strong>Traffic Safety Exam</strong> (40 questions,
+                      100% required)
                     </span>
                   </li>
                 </ul>

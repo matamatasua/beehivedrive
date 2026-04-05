@@ -6,6 +6,7 @@ import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
 import type { Question, Confidence } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { ExplainButton } from "@/components/quiz/ExplainButton";
+import { renderWithAcronyms } from "@/lib/acronym-utils";
 
 interface QuestionCardProps {
   question: Question;
@@ -82,7 +83,7 @@ export function QuestionCard({
       {/* Question text */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
-          {question.text}
+          {renderWithAcronyms(question.text)}
         </h2>
         {question.imageUrl && (
           <div className="mt-3 flex justify-center">
@@ -111,7 +112,7 @@ export function QuestionCard({
               <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-600">
                 {String.fromCharCode(65 + index)}
               </span>
-              <span className="text-gray-800 leading-relaxed">{option.text}</span>
+              <span className="text-gray-800 leading-relaxed">{renderWithAcronyms(option.text)}</span>
               {answerState === "revealed" && index === correctIndex && (
                 <CheckCircle2 size={20} className="flex-shrink-0 text-green-500 ml-auto" />
               )}
@@ -190,11 +191,13 @@ export function QuestionCard({
                   {isCorrect ? "Correct!" : "Not quite"}
                 </p>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  {isCorrect
-                    ? question.explanation
-                    : selectedIndex !== null
-                    ? question.options[selectedIndex].explanation || question.explanation
-                    : question.explanation}
+                  {renderWithAcronyms(
+                    isCorrect
+                      ? question.explanation
+                      : selectedIndex !== null
+                      ? question.options[selectedIndex].explanation || question.explanation
+                      : question.explanation
+                  )}
                 </p>
                 {question.utahCodeRef && (
                   <p className="text-xs text-gray-500 mt-2">

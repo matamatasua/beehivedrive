@@ -2,7 +2,7 @@ import { type NextRequest } from "next/server";
 import { getAIClient } from "@/lib/ai/client";
 import { checkRateLimit } from "@/lib/ai/rate-limit";
 
-const SYSTEM_PROMPT = `You are a friendly Utah driving instructor helping a student understand why they got a practice test question wrong. Be concise (2-3 sentences), encouraging, and focus on WHY the correct answer is right. Reference specific Utah laws when relevant. Don't lecture — be conversational, like explaining to a friend.`;
+const SYSTEM_PROMPT = `You are a friendly Utah driving instructor helping a student understand why they got a practice test question wrong. Be concise (2-3 sentences), encouraging, and focus on WHY the correct answer is right. Reference specific Utah laws when relevant. Don't lecture. Be conversational, like explaining to a friend.`;
 
 export async function POST(request: NextRequest) {
   // Rate limit by IP

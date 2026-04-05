@@ -164,7 +164,7 @@ export default function DashboardPage() {
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-white text-base">Exam Simulator</p>
                   <p className="text-sm text-white/80 leading-snug">
-                    Take a full 50-question timed test — just like the real DLD exam
+                    Take a full 50-question timed test, just like the real DLD exam
                   </p>
                 </div>
                 <ArrowRight size={20} className="text-white/70 shrink-0" />

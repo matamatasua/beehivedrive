@@ -603,7 +603,7 @@ export function ChallengeMode({ onComplete, onExit }: ChallengeModeProps) {
                       ? "Passed with 100%!"
                       : !unlocked
                       ? "Complete previous section to unlock"
-                      : `${questionCount} questions — ${def.description}`}
+                      : `${questionCount} questions, ${def.description}`}
                   </p>
                 </div>
                 {unlocked && !passed && (

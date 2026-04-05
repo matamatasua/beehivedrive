@@ -6,7 +6,7 @@ import { Lightbulb, RefreshCw } from "lucide-react";
 
 const STORAGE_KEY = "beehive_study_tip";
 const FALLBACK_TIP =
-  "Focus on your weakest topics first — even 10 minutes of targeted practice each day builds real confidence for test day.";
+  "Focus on your weakest topics first. Even 10 minutes of targeted practice each day builds real confidence for test day.";
 
 interface StudyTipCardProps {
   weakCategories: string[];

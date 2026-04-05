@@ -54,7 +54,7 @@ export const MAP_STOPS = [
     slug: "traffic_signals",
     x: 220,
     y: 85,
-    funFact: "Host of the Sundance Film Festival — and some seriously winding mountain roads.",
+    funFact: "Host of the Sundance Film Festival, with some seriously winding mountain roads.",
   },
   {
     city: "Provo",
@@ -68,7 +68,7 @@ export const MAP_STOPS = [
     slug: "speed_limits",
     x: 320,
     y: 220,
-    funFact: "Near Arches National Park. Some Utah interstates allow 80 mph — the highest in the nation.",
+    funFact: "Near Arches National Park. Some Utah interstates allow 80 mph, the highest in the nation.",
   },
   {
     city: "St. George",
@@ -82,7 +82,7 @@ export const MAP_STOPS = [
     slug: "parking_rules",
     x: 145,
     y: 280,
-    funFact: "Hill parking matters here — always turn your wheels the right way on steep grades!",
+    funFact: "Hill parking matters here. Always turn your wheels the right way on steep grades!",
   },
   {
     city: "Logan",
@@ -181,17 +181,17 @@ export const ACHIEVEMENTS = [
 // --- The Numbers (key facts people fail on) ---
 export const KEY_NUMBERS = [
   { value: "15-50 feet", rule: "Stop distance before railroad tracks", mnemonic: "15 is your permit age, 50 is the test question count. Stop between them!" },
-  { value: "500 feet", rule: "Dim high beams for oncoming vehicle", mnemonic: "5 fingers waving at the oncoming car — 500 feet." },
+  { value: "500 feet", rule: "Dim high beams for oncoming vehicle", mnemonic: "5 fingers waving at the oncoming car, 500 feet." },
   { value: "300 feet", rule: "Dim high beams when following", mnemonic: "Following is closer than oncoming. 300 < 500." },
-  { value: "1,000 feet", rule: "Headlights required when visibility is less than", mnemonic: "1,000 feet — think '1K visibility' like a 1K race you can barely see." },
-  { value: "3 seconds", rule: "Minimum following distance at highway speed", mnemonic: "3 seconds: 'Only a FOOL follows too close' — fool has 4 letters, but 3 is the rule." },
-  { value: "15 feet", rule: "Minimum distance from fire hydrant when parking", mnemonic: "15 — same as the permit age. Stay 15 from hydrants!" },
+  { value: "1,000 feet", rule: "Headlights required when visibility is less than", mnemonic: "1,000 feet. Think '1K visibility' like a 1K race you can barely see." },
+  { value: "3 seconds", rule: "Minimum following distance at highway speed", mnemonic: "3 seconds: 'Only a FOOL follows too close.' Fool has 4 letters, but 3 is the rule." },
+  { value: "15 feet", rule: "Minimum distance from fire hydrant when parking", mnemonic: "15, same as the permit age. Stay 15 from hydrants!" },
   { value: "0.02%", rule: "BAC level where impairment actually begins", mnemonic: "POINT-ZERO-TWO: Two sips and you're already impaired." },
   { value: "0.05%", rule: "Utah's legal BAC limit (lowest in US)", mnemonic: "Utah's POINT-ZERO-FIVE is #1 strictest. High five for safety! ✋" },
-  { value: "25/65/15", rule: "Utah minimum insurance (per person/per accident/property)", mnemonic: "25-65-15: Remember '25 at 65 in 15 seconds' — fast like a car." },
-  { value: "20 mph", rule: "Speed limit in school zones", mnemonic: "20 in a school zone — even 21 is an instant fail on the driving test!" },
-  { value: "40 hours", rule: "Supervised driving required (10 at night) for teens", mnemonic: "40 hours — a full work week of driving practice." },
+  { value: "25/65/15", rule: "Utah minimum insurance (per person/per accident/property)", mnemonic: "25-65-15: Remember '25 at 65 in 15 seconds,' fast like a car." },
+  { value: "20 mph", rule: "Speed limit in school zones", mnemonic: "20 in a school zone. Even 21 is an instant fail on the driving test!" },
+  { value: "40 hours", rule: "Supervised driving required (10 at night) for teens", mnemonic: "40 hours, a full work week of driving practice." },
   { value: "6 months", rule: "Minimum learner permit holding period", mnemonic: "Half a year with your permit before you can test." },
   { value: "12 inches", rule: "Maximum distance from curb when parallel parking", mnemonic: "12 inches = 1 foot. Park within a foot of the curb." },
-  { value: "100 feet", rule: "Signal before turning in the city", mnemonic: "100 feet in the city — think '1 football field' (roughly)." },
+  { value: "100 feet", rule: "Signal before turning in the city", mnemonic: "100 feet in the city. Think '1 football field' (roughly)." },
 ] as const;

@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       : "No weak areas identified yet",
     strongCategories.length > 0
       ? `Strong areas: ${strongCategories.join(", ")}`
-      : "No strong areas yet — just getting started",
+      : "No strong areas yet, just getting started",
   ].join("\n");
 
   try {
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     });
 
     const textBlock = message.content.find((b) => b.type === "text");
-    const tip = textBlock ? textBlock.text : "Keep practicing — you're making progress!";
+    const tip = textBlock ? textBlock.text : "Keep practicing, you're making progress!";
 
     return Response.json({ tip });
   } catch (err) {
