@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -30,6 +30,7 @@ import { useGameState } from "@/hooks/useGameState";
 import { getLicenseLevel } from "@/lib/learning/leitner";
 import { SAMPLE_QUESTIONS } from "@/lib/sample-questions";
 import { getCategoryName } from "@/lib/category-utils";
+import { getStorageItem, STORAGE_KEYS } from "@/lib/storage";
 import type { LicenseLevel, SessionType, Track } from "@/types";
 
 // ---------------------------------------------------------------------------
@@ -200,7 +201,16 @@ export default function DashboardPage() {
     }
   }
 
-  // Hydration guard — prevents flash of empty state
+  // Redirect to onboarding if not completed
+  useEffect(() => {
+    if (!loaded) return;
+    const onboarding = getStorageItem<{ completedAt: string }>(STORAGE_KEYS.onboarding);
+    if (!onboarding) {
+      router.replace("/onboarding");
+    }
+  }, [loaded, router]);
+
+  // Hydration guard
   if (!loaded) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">

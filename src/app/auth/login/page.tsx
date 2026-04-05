@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
+import { Mail, Lock, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody } from "@/components/ui/Card";
 import { createClient } from "@/lib/supabase/client";
@@ -150,25 +150,15 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="space-y-3 pt-1 text-center text-sm">
-            <p className="text-gray-500">
-              Don&apos;t have an account?{" "}
-              <Link
-                href="/auth/signup"
-                className="font-semibold text-amber-600 hover:text-amber-700"
-              >
-                Sign up
-              </Link>
-            </p>
-
+          <p className="pt-1 text-center text-sm text-gray-500">
+            Don&apos;t have an account?{" "}
             <Link
-              href="/onboarding"
-              className="inline-flex items-center gap-1 text-gray-400 hover:text-gray-600 transition-colors"
+              href="/auth/signup"
+              className="font-semibold text-amber-600 hover:text-amber-700"
             >
-              Continue without account
-              <ArrowRight className="h-3.5 w-3.5" />
+              Sign up
             </Link>
-          </div>
+          </p>
         </CardBody>
       </Card>
     </motion.div>
