@@ -175,7 +175,7 @@ export default function HistoryPage() {
       </header>
 
       <motion.main
-        className="max-w-lg mx-auto px-4 pt-6 space-y-6"
+        className="max-w-lg mx-auto px-4 pt-6 pb-24 space-y-6"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

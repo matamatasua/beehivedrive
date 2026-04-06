@@ -250,7 +250,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-lg mx-auto px-4 py-6 pb-24 space-y-6">
         {isFirstTime ? (
           <FirstTimeDashboard
             nextStep={nextStep}
